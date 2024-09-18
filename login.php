@@ -3,23 +3,33 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Login</title>
         <link rel="stylesheet" type="text/css" href="log1.css">
 </head>
-<body >
-<ul>
-            <li><a href="login.php">Login</a></li>
-            <li ><a  href="#about">About </a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="vehicle.php">Home</a></li>
-
- 
-</ul> 
-<div id="container" class="flex-container" style="background-color: #f2f2f2;">
-       <h1 style="text-alig:center">Login</h1>
-        <form>
-             
-        </form>
-</div>   
+<body>
+        <!-- navbar -->
+        <ul>
+                <li><a href="login.php">Login</a></li>
+                <li ><a  href="#about">About </a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="vehicle.php">Home</a></li> 
+        </ul> 
+        
+        <section class="content">
+                <div id="container" class="card">
+                        <h1>Login</h1>
+                        <form action="login_process.php" method="post">  
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" placeholder="username" required><br><br>
+                                
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" placeholder="password" required><br><br>
+                                
+                                <input type="submit" value="Login">
+                                <p class="signuptext">Don't have an account? <a href="signup.php">Sign Up</a></p>
+                        </form>
+                </div>
+        </section>
+           
 </body>
 </html>
