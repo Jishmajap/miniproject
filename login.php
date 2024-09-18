@@ -26,7 +26,7 @@
                                 <input type="password" id="password" name="password" placeholder="password" required><br><br>
                                 
                                 <input type="submit" value="Login">
-                                <p class="signuptext">Don't have an account? <a href="/log/sign.html">Sign Up</a></p>
+                                <p class="signuptext">Don't have an account? <a href="signup.php">Sign Up</a></p>
                         </form>
                 </div>
         </section>
