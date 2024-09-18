@@ -1,0 +1,82 @@
+body{
+    background-image: url("car repair.jpg");
+    background-size: cover; /* Ensures the image covers the container */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Keeps the background image fixed */
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+  }
+ 
+/* Flex Container Styles */
+.flex-container {
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 500px;
+    height: 650px;
+    padding: 40px;
+   
+    box-sizing: border-box;
+    color: #912e2e;
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    align-items: left;  
+    justify-content: flex-start; /* Align content to the top */
+    
+  }  
+/* navbar */
+.ro{
+    display: flex;
+    justify-content: end;
+  }
+  
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+                          
+  li {
+    float:right;
+  }                                                                                       
+  
+  li a {
+    display: block;
+    color: #67140a;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size:25px;
+}
+
+li a:hover:not(.active) {
+  background-color: white;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
