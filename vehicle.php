@@ -3,41 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>VRS</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    
-
-        <title>vehicle repair</title>
-
 </head>
-<body >
 
-
-
-
-
-<ul>
-            <li><a href="login.php">Login</a></li>
-            <li ><a  href="#about">About </a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="vehicle.php">Home</a></li>
-
- 
-</ul>
+<body class="home">
+    <ul class="navul">
+        <li class="navli"><a href="login.php">Login</a></li>
+        <li class="navli"><a href="#contact">Contact</a></li>
+        <li class="navli"><a href="#about">About </a></li>
+        <li class="navli"><a href="#home">Home</a></li>
+    </ul>
    
-<div id="align">
-
-    <div class="color" >
-        <h1 class="color">Service at your
+    <div class="content" id="home">
+        <h1>Service at your
         <br> finger tip.</h1>
+        <p> 
+            Lorem ipsum dolor sit amet, consectetur<br>
+            adipiscing elit, sed do eiusmod tempor<br>
+            incididunt ut labore et dolore
+        </p>
+        
+        <form >
+            <a href="location.php"><input type="button"  value="Find Now" name="Find Now" id="findnow" ></a>
+        </form>
     </div>
-                <h5 class="col">  Lorem ipsum dolor sit amet, consectetur<br>
-                    adipiscing elit, sed do eiusmod tempor<br>
-                    incididunt ut labore et dolore</h5>
-    <form >
-      <a href="acess.php">  <input type="button"  value="Find Now" name="Find Now" class="button" ></a>
-    </form>
-</div>
-
 </body>
 </html>

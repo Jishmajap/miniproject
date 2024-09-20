@@ -1,4 +1,6 @@
-body{
+/* Main file */
+
+.home /*body*/{
   background-image: url("car repair.jpg");
   background-size: cover; /* Ensures the image covers the container */
   background-position: center; /* Centers the background image */
@@ -7,30 +9,45 @@ body{
   margin: 0;
 }
 
-
-/* Main Content Styles */
-#align {
-  text-align: left;
-  padding: 50px 20px;
-  color: #333;
-  
-}
-/*color text*/
-.color {
+/* NAVBAR */
+.navul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}                  
+.navli {
+  float:right;
+}                                                                                       
+.navli a {
+  display: block;
   color: #67140a;
-  font-size: 70px;
-  margin-bottom: 20px;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size:25px;
+}
+.navli a:hover{
+  background-color: white;
 }
 
-.col {
-  color: azure;
-  font-size: 20px;
-  margin-bottom: 30px;
+
+
+.content {
+  padding-top: 50px;
+  padding-left: 40px;
+  color: #67140a;
+  font-size: 40px;
 }
+.content p{
+  font-size: 25px;
+  color: white;
+  margin-top: -30px;
+}
+
 /* login button */
-.button {
+#findnow {
   font-size: 24px;
-  background-color: #4e0707;
+  background-color: #67140a;
   width: 130px;
   height: 50px;
   color: azure;
@@ -39,103 +56,9 @@ body{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  /* transition: background-color 0.3s,; */
 }
-
-.button:hover {
-  background-color: #3a0505;
-  transform: scale(1.05);
+#findnow:hover {
+  background-color: transparent;
+  border: 2px solid white;
 }
-#flex{
-  margin: 2rem;
-}
-
-
-/* Flex Container Styles */
-.flex-container {
-  margin: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  max-width: 900px;
-  width: 450px;
-  height: 500px;
-  padding: 40px;
-  margin: 0 auto; /* Center container */
-  box-sizing: border-box;
-  color: #333;
-  display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  align-items: center;
-  justify-content: flex-start; /* Align content to the top */
-  text-align: center; /* Center text inside flex container */
-}
-
-/* Alignment and Text Styles */
-.cor {
-  color: #67140a;
-  font-size: 40px;
-  text-align: center;
-
-}
-/* navbar */
-.ro{
-  display: flex;
-  justify-content: end;
-}
-
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-                        
-li {
-  float:right;
-}                                                                                       
-
-li a {
-  display: block;
-  color: #67140a;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size:25px;
-}
-
-li a:hover:not(.active) {
-  background-color: white;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* 3rd page background */
-
-.bag
-{
-  background-color: #333;
-}
-
