@@ -31,7 +31,7 @@
                             <label for="confirmpassword">Confirm Password:</label>
                             <input type="password" id="confirmpassword" name="confirmpassword" placeholder="confirm password" required><br><br>
                             
-                            <input type="submit" value="Login">
+                            <input type="submit" value="Signup">
 
                             <p class="logintext">Already have an account? <a href="login.php">Login</a></p>
                         </form>
