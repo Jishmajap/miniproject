@@ -10,9 +10,9 @@
         <!-- navbar -->
         <ul class="navul">
         <li class="navli"><a href="login.php">Login</a></li>
-                <li class="navli"><a href="vehicle.php#contact">Contact</a></li>
-                <li class="navli"><a href="vehicle.php#about">About </a></li>
-                <li class="navli"><a href="vehicle.php">Home</a></li>
+                <li class="navli"><a href="index.php#contact">Contact</a></li>
+                <li class="navli"><a href="index.php#about">About </a></li>
+                <li class="navli"><a href="index.php">Home</a></li>
         </ul>
         
         <section class="content">
