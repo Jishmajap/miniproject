@@ -1,7 +1,7 @@
 /* Main file */
 
-.home /*body*/{
-  background-image: url("car repair.jpg");
+body{
+  background-image: url("carrepair.jpg");
   background-size: cover; /* Ensures the image covers the container */
   background-position: center; /* Centers the background image */
   background-attachment: fixed; /* Keeps the background image fixed */
@@ -30,20 +30,18 @@
   background-color: white;
 }
 
-
-
-.content {
+/*home page body*/
+.container {
   padding-top: 50px;
   padding-left: 40px;
   color: #67140a;
   font-size: 40px;
 }
-.content p{
+.container p{
   font-size: 25px;
   color: white;
   margin-top: -30px;
 }
-
 /* login button */
 #findnow {
   font-size: 24px;
@@ -56,9 +54,112 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  /* transition: background-color 0.3s,; */
 }
 #findnow:hover {
   background-color: transparent;
   border: 2px solid white;
+}
+
+
+
+
+
+
+
+/* Login & Signin  */
+
+.content{
+  align-items: center;  
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column; 
+}
+.content h1{
+  color: #67140a;
+  font-size: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  background-color: rgba(251, 245, 245, 0.5 ); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 500px;
+      height: 600px;
+  color: #912e2e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}  
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+form label {
+  margin: -10px 0 10px 40px;/* top right bottom left */
+}
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+  padding: 10px;
+  /* color: #912e2e; */
+  border: 2px solid #912e2e;
+  border-radius: 6px;
+  width: 25em;
+  align-self: center;
+}
+form input[type="submit"] {
+  background-color: #912e2e;
+  color: white;
+  font-weight: 600;
+  width: 15em;
+  padding: 12px;
+  margin-top: -1em;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  align-self: center;
+} 
+form input[type="submit"]:hover {
+background-color: transparent;
+border: 2px solid #912e2e;
+color: #912e2e;
+padding: 10.5px;
+}
+form select{
+  padding: 10px;
+  border: 2px solid #912e2e;
+  border-radius: 6px;
+  width: 25em;
+  align-self: center;
+}
+form p{
+  text-align: center;
+}
+
+
+
+
+
+/*Location.php  */
+.city {
+  border-radius: 9px;
+  padding: 15px;
+  width: 15rem;
+  border-width: 3px;
+  cursor: pointer;
+}
+.locationform input[type="text"] {
+  margin-top: -1em;
+  border-radius: 9px;
+  padding: 15px; 
+  width: 13rem; 
+  border-width:2px
+}
+.locationform input[type="submit"] {
+  width: 15rem;
 }

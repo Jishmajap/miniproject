@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body class="home">
+<body>
     <ul class="navul">
         <li class="navli"><a href="login.php">Login</a></li>
         <li class="navli"><a href="#contact">Contact</a></li>
@@ -15,7 +15,7 @@
         <li class="navli"><a href="#home">Home</a></li>
     </ul>
    
-    <div class="content" id="home">
+    <div class="container" id="home">
         <h1>Service at your
         <br> finger tip.</h1>
         <p> 
