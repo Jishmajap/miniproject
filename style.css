@@ -1,41 +1,52 @@
-*{
-  margin:0;
-  padding: 0;
-}
+/* Main file */
 
-.background{
-  background-image: url("car repair.jpg");
+body{
+  background-image: url("carrepair.jpg");
   background-size: cover; /* Ensures the image covers the container */
   background-position: center; /* Centers the background image */
   background-attachment: fixed; /* Keeps the background image fixed */
-  height: 100vh; /* Full viewport height */
+  /* h/eight: 100vh; Full viewport height */
   margin: 0;
 }
 
-
-/* Main Content Styles */
-#align {
-  text-align: left;
-  padding: 50px 20px;
-  color: #333;
-  
-}
-/*color text*/
-.color {
+/* NAVBAR */
+.navul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}                  
+.navli {
+  float:right;
+}                                                                                       
+.navli a {
+  display: block;
   color: #67140a;
-  font-size: 70px;
-  margin-bottom: 20px;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size:25px;
+}
+.navli a:hover{
+  background-color: white;
 }
 
-.col {
-  color: azure;
-  font-size: 20px;
-  margin-bottom: 30px;
+/*home page body*/
+.container {
+  padding-top: 2em;
+  padding-left: 40px;
+  padding-bottom: 5em;
+  color: #67140a;
+  font-size: 40px;
+}
+.container p{
+  font-size: 25px;
+  color: white;
+  margin-top: -30px;
 }
 /* login button */
-.button {
+#findnow {
   font-size: 24px;
-  background-color: #4e0707;
+  background-color: #67140a;
   width: 130px;
   height: 50px;
   color: azure;
@@ -44,111 +55,16 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
 }
-
-.button:hover {
-  background-color: #3a0505;
-  transform: scale(1.05);
-}
-#flex{
-  margin: 2rem;
-}
-
-
-/* Flex Container Styles */
-.flex-container {
-  margin: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  max-width: 900px;
-  width: 450px;
-  height: 500px;
-  padding: 40px;
-  margin: 0 auto; /* Center container */
-  box-sizing: border-box;
-  color: #333;
-  display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  align-items: center;
-  justify-content: flex-start; /* Align content to the top */
-  text-align: center; /* Center text inside flex container */
-}
-
-/* Alignment and Text Styles */
-.cor {
-  color: #67140a;
-  font-size: 40px;
-  text-align: center;
-
-}
-/* navbar */
-.ro{
-  display: flex;
-  justify-content: end;
-}
-
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-                        
-li {
-  float:right;
-}                                                                                       
-
-li a {
-  display: block;
-  color: #67140a;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size:25px;
-}
-
-li a:hover:not(.active) {
-  background-color: white;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* 3rd page background */
-
-.bag
-{
-  background-color: #333;
+#findnow:hover {
+  background-color: transparent;
+  border: 2px solid white;
 }
 
 /*about page*/
 .about {
   background-color: #3f3e3e;
-  padding: 2rem 0;
-
+  padding-bottom: 15em;
 }
 
 .about h2 {
@@ -178,5 +94,109 @@ li a:hover:not(.active) {
 .abcontent{
   padding-top: 200px;
   padding-left: 100px;
+}
+
+
+
+
+
+
+
+/* Login & Signin PAGE */
+
+.content{
+  align-items: center;  
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column; 
+}
+.content h1{
+  color: #67140a;
+  font-size: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  background-color: rgba(251, 245, 245, 0.5 ); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 500px;
+      height: 600px;
+  color: #912e2e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}  
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+form label {
+  margin: -10px 0 10px 40px;/* top right bottom left */
+}
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+  padding: 10px;
+  /* color: #912e2e; */
+  border: 2px solid #912e2e;
+  border-radius: 6px;
+  width: 25em;
+  align-self: center;
+}
+form input[type="submit"] {
+  background-color: #912e2e;
+  color: white;
+  font-weight: 600;
+  width: 15em;
+  padding: 12px;
+  margin-top: -1em;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  align-self: center;
+} 
+form input[type="submit"]:hover {
+background-color: transparent;
+border: 2px solid #912e2e;
+color: #912e2e;
+padding: 10.5px;
+}
+form select{
+  padding: 10px;
+  border: 2px solid #912e2e;
+  border-radius: 6px;
+  width: 25em;
+  align-self: center;
+}
+form p{
+  text-align: center;
+}
+
+
+
+
+
+/*Location.php  */
+.city {
+  border-radius: 9px;
+  padding: 15px;
+  width: 15rem;
+  border-width: 3px;
+  cursor: pointer;
+}
+.locationform input[type="text"] {
+  margin-top: -1em;
+  border-radius: 9px;
+  padding: 15px; 
+  width: 13rem; 
+  border-width:2px
+}
+.locationform input[type="submit"] {
+  width: 15rem;
 }
 
