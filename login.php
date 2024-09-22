@@ -4,16 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
-        <link rel="stylesheet" type="text/css" href="log1.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
         <!-- navbar -->
-        <ul>
-                <li><a href="login.php">Login</a></li>
-                <li ><a  href="#about">About </a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="vehicle.php">Home</a></li> 
-        </ul> 
+        <ul class="navul">
+                <li class="navli"><a href="login.php">Login</a></li>
+                <li class="navli"><a href="index.php#contact">Contact</a></li>
+                <li class="navli"><a href="index.php#about">About </a></li>
+                <li class="navli"><a href="index.php">Home</a></li>
+        </ul>
         
         <section class="content">
                 <div id="container" class="card">
