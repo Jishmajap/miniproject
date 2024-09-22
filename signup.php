@@ -18,7 +18,7 @@
         <section class="content">
                 <div id="container" class="card">
                         <h1>SignUp</h1>
-                        <form action="login_process.php" method="post">  
+                        <form action="signup_process.php" method="post">  
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" placeholder="name" required><br><br>
                         
