@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -23,9 +25,17 @@ if ($result->num_rows > 0) {
     // User exists, verify password
     $row = $result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
-        echo "Login successful!";
-        // Redirect to a protected page or dashboard
-        header("Location: location.php");
+        // Store user data in session
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['name'];
+        $_SESSION['user_email'] = $row['email'];
+        
+        // Debugging: Check if session variables are set
+        var_dump($_SESSION);
+        
+        // Redirect to dashboard
+        header("Location: dashboard.php");
+        exit();
     } else {
         echo "Invalid password.";
     }
