@@ -21,14 +21,16 @@ $confirmpassword = $_POST['confirmpassword'];
 if ($password !== $confirmpassword) {
     die("Passwords do not match.");
 }
-
-
+// Hash the password
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$password = $hashed_password;
 // Insert user into database
 $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
     header("Location: login.php");
+
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
