@@ -40,11 +40,15 @@
 
 <section class="about">
     <div class="abcontent" >
-      <h2 class="head">Who We Are</h2>
+      <h2 class="head">About Us</h2>
       <p>
-        We are a passionate team dedicated to providing innovative solutions in the field of technology.<br>
-        Our mission is to empower individuals and organizations with cutting-edge tools that improve productivity,</br>
-        foster creativity, and drive progress.
+      
+       We are a vibrant community of innovators and learners, driven by a passion for technology and creativity. Our mission is to create an environment <br>
+       where individuals can explore, experiment, and grow. Whether it's coding, design, or working with hardware, we believe in the power of hands-on learning and collaboration.
+       With a strong belief in Learn, Unlearn, Relearn, we encourage our members to push boundaries and challenge themselves to think differently. 
+       Through workshops, hackathons, peer-learning sessions, and projects, we provide opportunities to enhance skills and turn ideas into reality.
+       Our space is open to anyone with a curious mind, where exploration leads to discovery, and every project is a stepping stone to something bigger.
+       Join us in this journey of innovation and growth, where creativity knows no limits!
       </p>
 
       
