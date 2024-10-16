@@ -15,6 +15,10 @@ body{
   margin: 0;
   padding: 0;
   overflow: hidden;
+  position: fixed;
+  background: rgba(146, 145, 145, 0.5);
+  width: 100%;
+  border-radius: 6px;
 }                  
 .navli {
   float:right;
@@ -93,6 +97,14 @@ body{
   padding-bottom: 15em;
 }
 
+.about h1{
+  color: #67140a;
+  font-size: 60px;
+  text-align: center;
+  position: absolute;
+  margin-left: 4em;
+  margin-top:1em;
+}
 .about h2 {
   color:  #4b0c06;
    margin-bottom: 1rem;
@@ -128,7 +140,7 @@ body{
   background: #000000;
   padding: 10px;
   color: #67140a;
-  height: 100vh;
+  height: 89vh;
 }
 
 #contact h1{
@@ -211,13 +223,15 @@ button {
 
 
 
-/* Login & Signin PAGE */
+/* Login & Signin Files */
 
 .content{
   align-items: center;  
   justify-content: flex-start;
   display: flex;
   flex-direction: column; 
+  padding-top: 5em;
+
 }
 .content h1{
   color: #67140a;
@@ -233,7 +247,7 @@ button {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   width: 500px;
-      height: 600px;
+  height: 600px;
   color: #912e2e;
   display: flex;
   flex-direction: column;
@@ -291,6 +305,22 @@ form p{
 
 
 /*Location.php  */
+#location{
+  color: #67140a;
+}
+
+.loccontent{
+  align-items: center;  
+  display: flex;
+  flex-direction: column; 
+}
+.loccontent h1{
+  color: #67140a;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 25px;
+  margin-bottom: -5px;
+}
 .city {
   border-radius: 9px;
   padding: 15px;
@@ -308,3 +338,25 @@ form p{
 .locationform input[type="submit"] {
   width: 15rem;
 }
+.currentloc{
+  margin-top: -1em;
+  border-radius: 9px;
+  padding: 15px; 
+  width: 15rem; 
+  border-width:2px;
+  background-color: #912e2e;
+}
+#curloc{
+  border-radius: 9px;
+  padding: 15px; 
+  width: 15rem; 
+  border-width:2px;
+
+}
+.curloc {
+  background-color: white;
+  border: #912e2e 1px solid;
+  margin-bottom: 2em;
+
+}
+

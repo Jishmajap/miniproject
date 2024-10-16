@@ -2,9 +2,8 @@
 session_start();
 ?>
 
-
-</ul>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,8 +24,8 @@ session_start();
     <?php else: ?>
         <li class="navli"><a href="login.php">Login</a></li>
     <?php endif; ?>
-    <li class="navli"><a href="vehicle.php">Vehicle</a></li>
-    <li class="navli"><a href="contact.php">Contact</a></li>
+    <li class="navli"><a href="location.php">Find Now</a></li>
+    <li class="navli"><a href="index.php#contact">Contact</a></li>
     <li class="navli"><a href="index.php#about">About</a></li>
     <li class="navli"><a href="index.php">Home</a></li>
     </ul>
@@ -48,6 +47,7 @@ session_start();
 
 
     <section class="about" id="about">
+        <h1>About </h1>
         <div class="abcontent" >
         <h2 class="head">Who We Are</h2>
         <p>
@@ -67,23 +67,9 @@ session_start();
     </section>
 
 
-    <?php
-$message = '';
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $user_message = $_POST['message'] ?? '';
-    
-    // Here you would typically process the form data, such as sending an email
-    // For this example, we'll just create a success message
-    $message = "Thank you, $name! Your message has been received.";
-    
-    // In a real-world scenario, you might use the mail() function or a library like PHPMailer
-    // mail('your@email.com', 'New Contact Form Submission', $user_message, "From: $email");
-}
-?>
+ 
 
-<?php include 'contact.php'; ?>
+
     
 
 <section id="contact" >
@@ -131,6 +117,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="footer">
             © ALL OF THE RIGHTS RESERVED
         </div>
+
+        <?php
+$message = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $user_message = $_POST['message'] ?? '';
+    
+    // Here you would typically process the form data, such as sending an email
+    // For this example, we'll just create a success message
+    $message = "Thank you, $name! Your message has been received.";
+    
+    // In a real-world scenario, you might use the mail() function or a library like PHPMailer
+    // mail('your@email.com', 'New Contact Form Submission', $user_message, "From: $email");
+}
+?>
         </section>
 
   
