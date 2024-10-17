@@ -3,15 +3,15 @@ session_start();
 require_once 'config.php';
 
 // Check if admin is logged in
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: admin_login.php");
-    exit();
-}
 
 // Fetch shop details
-$sql = "SELECT * FROM shops WHERE id = 1"; // Assuming there's only one shop for simplicity
+$sql = "SELECT * FROM shops"; // Assuming there's only one shop for simplicity
 $result = $mysqli->query($sql);
-$shop = $result->fetch_assoc();
+if ($result) {
+    $shop = $result->fetch_assoc();
+} else {
+    die("Error fetching shop details: " . $mysqli->error);
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $shop_name = $_POST['shop_name'];
