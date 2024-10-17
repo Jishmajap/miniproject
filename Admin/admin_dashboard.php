@@ -3,32 +3,19 @@ session_start();
 require_once 'config.php';
 
 // Check if admin is logged in
+if (!isset($_SESSION['email'])) {
+    header("Location: admin_login.php");
+    exit();
+}
 
-// Fetch shop details
-$sql = "SELECT * FROM shops"; // Assuming there's only one shop for simplicity
+// Fetch all shop details
+$sql = "SELECT * FROM shops";
 $result = $mysqli->query($sql);
-if ($result) {
-    $shop = $result->fetch_assoc();
-} else {
+if (!$result) {
     die("Error fetching shop details: " . $mysqli->error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $shop_name = $_POST['shop_name'];
-    $location = $_POST['location'];
-    $description = $_POST['description'];
-
-    $sql = "UPDATE shops SET shop_name = ?, location = ?, description = ? WHERE id = 1";
-    if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param("sss", $shop_name, $location, $description);
-        if ($stmt->execute()) {
-            $success = "Shop details updated successfully.";
-        } else {
-            $error = "Error updating shop details: " . $stmt->error;
-        }
-        $stmt->close();
-    }
-}
+$shops = $result->fetch_all(MYSQLI_ASSOC);
 
 $mysqli->close();
 ?>
@@ -39,29 +26,44 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
-    <h2>Edit Shop Details</h2>
-    <form action="admin_dashboard.php" method="post">
-        <label for="shop_name">Shop Name:</label>
-        <input type="text" id="shop_name" name="shop_name" value="<?php echo htmlspecialchars($shop['shop_name']); ?>" required><br><br>
-        
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($shop['location']); ?>" required><br><br>
-        
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required><?php echo htmlspecialchars($shop['description']); ?></textarea><br><br>
-        
-        <input type="submit" value="Update">
-    </form>
-    <?php if (isset($success)): ?>
-        <p><?php echo $success; ?></p>
-    <?php endif; ?>
-    <?php if (isset($error)): ?>
-        <p><?php echo $error; ?></p>
-    <?php endif; ?>
-    <a href="admin_logout.php">Logout</a>
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="admin_dashboard.php">Dashboard</a></li>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="admin_logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <section class="dashboard">
+            <h1>Admin Dashboard</h1>
+            <div class="page">
+                <h2>Shop Details</h2>
+                <button onclick="window.location.href='manage_shop.php'">Add New Shop</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shop Name</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($shops as $shop): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($shop['shop_name']); ?></td>
+                                <td><?php echo htmlspecialchars($shop['location']); ?></td>
+                                <td><?php echo htmlspecialchars($shop['description']); ?></td>
+                                <td><a href="manage_shop.php?shop_name=<?php echo urlencode($shop['shop_name']); ?>">Edit</a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
