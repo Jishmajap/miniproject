@@ -1,87 +1,185 @@
-    /* admin.css */
-
-    /* General Styles */
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
-/* Header Styles */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+/* Dashboard */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px; 
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #333;
+  color: white;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  text-align: center;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}
+
+.dashboard {
+  margin-left: 200px;
+  padding: 20px;
+  width: calc(100% - 200px);
+}
+
+.page {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard  table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard  table, th, td {
+  border: 1px solid #ccc;
+}
+
+.dashboard  th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+.dashboard  th {
+  background-color: #f4f4f4;
+}
+
+.dashboard  a {
+  color: #333;
+  text-decoration: none;
+}
+
+.dashboard  a:hover {
+  text-decoration: underline;
+}
+
+.dashboard  button {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dashboard  button:hover {
+  background-color: #555;
+}
+
+
+
+
+
+
+/* Admin Login & Signin */
+
+.verif_body{
+    display: flex;
+    flex-direction: column;   
+    align-items: center;      
+}
+.verif_body h1{
+    color: #67140a;
+    font-size: 50px;
     text-align: center;
 }
 
-header h1 {
-    margin: 0;
+.card{
+    background-color: rgba(205, 34, 34, 0.5); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    width: 500px;
+    height: 500px;
+    color: #912e2e;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+  }  
+  
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;    
 }
-
-/* Sidebar Styles */
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #444;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding-top: 20px;
+form label {
+    margin: -10px 0 10px 40px;/* top right bottom left */
 }
-
-.sidebar a {
-    color: #fff;
-    padding: 15px;
-    text-decoration: none;
-    display: block;
-}
-
-.sidebar a:hover {
-    background-color: #555;
-}
-
-/* Main Content Styles */
-.main-content {
-    margin-left: 250px;
-    padding: 20px;
-}
-
-.main-content h2 {
-    color: #333;
-}
-
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
     padding: 10px;
-    text-align: left;
+    border: 2px solid #912e2e;
+    border-radius: 6px;
+    width: 25em;
+    align-self: center;
 }
-
-th {
-    background-color: #f2f2f2;
-}
-
-/* Button Styles */
-button {
-    background-color: #333;
-    color: #fff;
+  form input[type="submit"] {
+    background-color: #912e2e;
+    color: white;
+    font-weight: 600;
+    width: 15em;
+    padding: 12px;
+    margin-top: -1em;
     border: none;
-    padding: 10px 20px;
+    border-radius: 3px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #555;
-}
+    align-self: center;
+  } 
+  form input[type="submit"]:hover {
+  background-color: transparent;
+  border: 2px solid #912e2e;
+  color: #912e2e;
+  padding: 10.5px;
+  }
+  form select{
+    padding: 10px;
+    border: 2px solid #912e2e;
+    border-radius: 6px;
+    width: 25em;
+    align-self: center;
+  }
+  form p{
+    text-align: center;
+  }
+  .trylogin, .trysignin{
+    text-align: center;
+  }
+  
+  
