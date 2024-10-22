@@ -60,8 +60,9 @@ $mysqli->close();
 </head>
 <body>
     <section class="verif_body">
-        <h1>Admin Login</h1>
-        <div class="card">
+        
+        <div class="card" >
+            <h1>Admin Login</h1>
             <form action="admin_login.php" method="post">
                 <label for="email">Email-ID:</label>
                 <input type="email" id="email" name="email" placeholder="abhijith@example.com" required><br><br>

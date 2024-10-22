@@ -44,8 +44,9 @@ $mysqli->close();
 </head>
 <body>
     <section class="verif_body">
-            <h1>Admin Signup</h1>
+            
             <div class="card">
+            <h1>Admin Signup</h1>
                 <form action="admin_signup.php" method="post">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" placeholder="name" required><br><br>

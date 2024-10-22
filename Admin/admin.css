@@ -113,24 +113,28 @@ body {
 .verif_body{
     display: flex;
     flex-direction: column;   
-    align-items: center;      
+    align-items: center;
 }
 .verif_body h1{
-    color: #67140a;
+  color: #67140a;
     font-size: 50px;
     text-align: center;
+    
 }
 
 .card{
+    
     background-color: rgba(205, 34, 34, 0.5); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     width: 500px;
-    height: 500px;
+    height: 620px;
     color: #912e2e;
-    /* display: flex; */
+    /* display: flex;  */
     /* flex-direction: column; */
-    /* justify-content: center; */
+    /* justify-content: center;  */
+    margin-top: 5rem;
+    margin-left: 30rem;
   }  
   
 form {
