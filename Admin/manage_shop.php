@@ -92,8 +92,10 @@ $mysqli->close();
             </ul>
         </nav>
         <section class="dashboard">
-            <h1><?php echo $shop_name ? 'Edit Shop' : 'Add New Shop'; ?></h1>
+            
             <div class="page">
+            <h1><?php echo $shop_name ? 'Edit Shop' : 'Add New Shop'; ?></h1>
+            
                 <form action="manage_shop.php<?php echo $shop_name ? '?shop_name=' . urlencode($shop_name) : ''; ?>" method="post">
                     <label for="shop_name">Shop Name:</label>
                     <input type="text" id="shop_name" name="shop_name" value="<?php echo htmlspecialchars($shop_name); ?>" required><br><br>
