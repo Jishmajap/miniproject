@@ -137,9 +137,9 @@ body{
 
 /* Contact Page */
 #contact {
-  background: #000000;
+  background: #353434;
   padding: 10px;
-  color: #67140a;
+  color: #b9200f;
   height: 89vh;
 }
 
@@ -178,7 +178,7 @@ button {
   width: 100%;
   margin-left: 12px;
   padding: 10px;
-  background-color: #0077be;
+  background-color: #890c0c;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -211,7 +211,7 @@ button {
   font-size: 12px;
 }
 .message {
-  background-color: #0077be;
+  background-color: #821111;
   color: white;
   padding: 10px;
   margin-bottom: 20px;
