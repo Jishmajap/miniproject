@@ -73,7 +73,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Find Car Service Centers Near You</h2>
+        <h2> Find Car Service Centers Near You </h2>
         <form id="locationForm">
             <div class="input-group">
                 <input type="text" id="location" name="location" placeholder="Enter a city or address">

@@ -86,9 +86,9 @@ $mysqli->close();
     <div class="container">
         <nav class="sidebar">
             <ul>
-                <li><a href="admin_dashboard.php">Dashboard</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="admin_logout.php">Logout</a></li>
+                <li><a href="admin_dashboard.php">Dashboard </a></li>
+                <li><a href="profile.php">Profile </a></li>
+                <li><a href="admin_logout.php">Logout </a></li>
             </ul>
         </nav>
         <section class="dashboard">
@@ -103,7 +103,7 @@ $mysqli->close();
                     <label for="location">Location:</label>
                     <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($location); ?>" required><br><br>
                     
-                    <label for="description">Description:</label>
+                    <label for="description"> Description: </label>
                     <textarea id="description" name="description" required><?php echo htmlspecialchars($description); ?></textarea><br><br>
                     
                     <input type="submit" value="<?php echo $shop_name ? 'Update Shop' : 'Add Shop'; ?>">

@@ -72,7 +72,7 @@ $mysqli->close();
                 
                 <input type="submit" value="Login">
             </form>
-            <p class="trylogin">Don't have an account? <a href="admin_signup.php">Signup</a></p>
+            <p class="trylogin" >Don't have an account? <a href="admin_signup.php">Signup</a></p>
             <?php if (isset($error)): ?>
                 <p><?php echo $error; ?></p>
             <?php endif; ?>

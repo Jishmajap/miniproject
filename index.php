@@ -24,9 +24,9 @@ session_start();
     <?php else: ?>
         <li class="navli"><a href="login.php">Login</a></li>
     <?php endif; ?>
-    <li class="navli"><a href="location.php">Find Now</a></li>
-    <li class="navli"><a href="index.php#contact">Contact</a></li>
-    <li class="navli"><a href="index.php#about">About</a></li>
+    <li class="navli"><a href="location.php"> Find Now </a></li>
+    <li class="navli"><a href="index.php#contact"> Contacts </a></li>
+    <li class="navli"><a href="index.php#about"> About </a></li>
     <li class="navli"><a href="index.php">Home</a></li>
     </ul>
     

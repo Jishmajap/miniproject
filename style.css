@@ -5,7 +5,6 @@ body{
   background-position: center; /* Centers the background image */
   background-attachment: fixed; /* Keeps the background image fixed */
   font-family: Arial, sans-serif;
-
   margin: 0;
 }
 
@@ -33,6 +32,7 @@ body{
 .navli a:hover{
   background-color: white;
 }
+
 
 .dropdown {
   display: none;
@@ -67,6 +67,7 @@ body{
   padding-bottom: 5em;
   color: #67140a;
   font-size: 40px;
+  color: #67140a;;
 }
 .container p{
   font-size: 25px;

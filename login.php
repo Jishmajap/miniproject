@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+
         <!-- navbar -->
         <ul class="navul">
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -20,11 +21,12 @@
         <li class="navli"><a href="login.php">Login</a></li>
     <?php endif; ?>
     <li class="navli"><a href="location.php">Find Now</a></li>
-    <li class="navli"><a href="index.php#contact">Contact</a></li>
+    <li class="navli"><a href="index.php#contact">Contacts</a></li>
     <li class="navli"><a href="index.php#about">About</a></li>
     <li class="navli"><a href="index.php">Home</a></li>
     </ul>
         
+
         <section class="content">
                 <div id="container" class="card">
                         <h1>Login</h1>
@@ -40,6 +42,7 @@
                         </form>
                 </div>
         </section>
+        
            
 </body>
 </html>

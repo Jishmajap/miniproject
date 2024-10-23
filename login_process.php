@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -12,6 +13,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 
 // Get form data
 $username = $_POST['username'];
@@ -42,4 +44,6 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+/*abcd*/
 ?>
+

@@ -25,6 +25,7 @@
         <li class="navli"><a href="index.php">Home</a></li>
         </ul>
         
+
         <section class="content">
                 <div id="container" class="card">
                         <h1>SignUp</h1>
@@ -47,6 +48,7 @@
                         </form>
                 </div>
         </section>
+        
            
 </body>
 </html>

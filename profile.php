@@ -16,6 +16,7 @@ $user_name = $_SESSION['user_name'];
 $user_email = $_SESSION['user_email'];
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +29,7 @@ $user_email = $_SESSION['user_email'];
     <header>
         <h1>Welcome to Your Dashboard</h1>
         <nav>
+            
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="profile.php">Profile</a></li>

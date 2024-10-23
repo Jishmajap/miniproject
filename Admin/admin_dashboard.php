@@ -48,7 +48,7 @@ $mysqli->close();
                             <th>Shop Name</th>
                             <th>Location</th>
                             <th>Description</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
