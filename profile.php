@@ -51,7 +51,7 @@ $user_email = $_SESSION['user_email'];
         </section>
     </main>
     <footer>
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; 2023 Your Website. All rights reserved. hi</p>
     </footer>
 </body>
 </html>
