@@ -1,0 +1,362 @@
+
+body{
+  background-image: url("carrepair.jpg");
+  background-size: cover; /* Ensures the image covers the container */
+  background-position: center; /* Centers the background image */
+  background-attachment: fixed; /* Keeps the background image fixed */
+  font-family: Arial, sans-serif;
+
+  margin: 0;
+}
+
+/* NAVBAR */
+.navul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  background: rgba(146, 145, 145, 0.5);
+  width: 100%;
+  border-radius: 6px;
+}                  
+.navli {
+  float:right;
+}                                                                                       
+.navli a {
+  display: block;
+  color: #67140a;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size:25px;
+}
+.navli a:hover{
+  background-color: white;
+}
+
+.dropdown {
+  display: none;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: none;
+  position: absolute; 
+  padding-right: 7em;/* Add this line to position the dropdown absolutely */
+}
+.dropdown li a {
+  padding: 12px 16px;
+  color: #67140a;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown li a:hover {
+  background-color: #ddd;
+}
+
+.navli:hover .dropdown {
+  display: block;  
+}
+
+
+/*home page body*/
+.container {
+  padding-top: 2em;
+  padding-left: 40px;
+  padding-bottom: 5em;
+  color: #67140a;
+  font-size: 40px;
+}
+.container p{
+  font-size: 25px;
+  color: white;
+  margin-top: -30px;
+}
+/* login button */
+#findnow {
+  font-size: 24px;
+  background-color: #67140a;
+  width: 130px;
+  height: 50px;
+  color: azure;
+  font-family: "DM Serif Text", serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#findnow:hover {
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+/*about page*/
+.about {
+  background-color: #3f3e3e;
+  padding-bottom: 15em;
+}
+
+.about h1{
+  color: #67140a;
+  font-size: 60px;
+  text-align: center;
+  position: absolute;
+  margin-left: 4em;
+  margin-top:1em;
+}
+.about h2 {
+  color:  #4b0c06;
+   margin-bottom: 1rem;
+   font-size: 40px;
+  
+}
+
+.about p {
+  margin-bottom: 1.5rem;
+  color: #f9f9f9;
+}
+
+.about ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about ul li {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.abcontent{
+  padding-top: 200px;
+  padding-left: 100px;
+}
+
+
+/* Contact Page */
+#contact {
+  background: #353434;
+  padding: 10px;
+  color: #b9200f;
+  height: 89vh;
+}
+
+#contact h1{
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 15em 0 10em;/* top right bottom left */
+}
+
+.left-column {
+  width: 50%;
+  /* align-items: end; */
+}
+.right-column {
+  width: 35%;
+}
+#contact input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: 1px solid #444;
+  color: #fff;
+}
+textarea {
+  height: 150px;
+}
+button {
+  width: 100%;
+  margin-left: 12px;
+  padding: 10px;
+  background-color: #890c0c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.contact-info {
+  margin-top: -70px;
+}
+.contact-info p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.contact-info i {
+  margin-right: 10px;
+}
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+}
+.message {
+  background-color: #821111;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+
+
+
+
+/* Login & Signin Files */
+
+.content{
+  align-items: center;  
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column; 
+  padding-top: 5em;
+
+}
+.content h1{
+  color: #67140a;
+  font-size: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  background-color: rgba(251, 245, 245, 0.5 ); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 500px;
+  height: 600px;
+  color: #912e2e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}  
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+form label {
+  margin: -10px 0 10px 40px;/* top right bottom left */
+}
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+  padding: 10px;
+  /* color: #912e2e; */
+  border: 2px solid #912e2e;
+  border-radius: 6px;
+  width: 25em;
+  align-self: center;
+}
+form input[type="submit"] {
+  background-color: #912e2e;
+  color: white;
+  font-weight: 600;
+  width: 15em;
+  padding: 12px;
+  margin-top: -1em;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  align-self: center;
+} 
+form input[type="submit"]:hover {
+background-color: transparent;
+border: 2px solid #912e2e;
+color: #912e2e;
+padding: 10.5px;
+}
+form select{
+  padding: 10px;
+  border: 2px solid #912e2e;
+  border-radius: 6px;
+  width: 25em;
+  align-self: center;
+}
+form p{
+  text-align: center;
+}
+
+
+
+
+
+/*Location.php  */
+#location{
+  color: #67140a;
+}
+
+.loccontent{
+  align-items: center;  
+  display: flex;
+  flex-direction: column; 
+}
+.loccontent h1{
+  color: #67140a;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 25px;
+  margin-bottom: -5px;
+}
+.city {
+  border-radius: 9px;
+  padding: 15px;
+  width: 15rem;
+  border-width: 3px;
+  cursor: pointer;
+}
+.locationform input[type="text"] {
+  margin-top: -1em;
+  border-radius: 9px;
+  padding: 15px; 
+  width: 13rem; 
+  border-width:2px
+}
+.locationform input[type="submit"] {
+  width: 15rem;
+}
+.currentloc{
+  margin-top: -1em;
+  border-radius: 9px;
+  padding: 15px; 
+  width: 15rem; 
+  border-width:2px;
+  background-color: #912e2e;
+}
+#curloc{
+  border-radius: 9px;
+  padding: 15px; 
+  width: 15rem; 
+  border-width:2px;
+
+}
+.curloc {
+  background-color: white;
+  border: #912e2e 1px solid;
+  margin-bottom: 2em;
+
+}
+
