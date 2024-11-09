@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="stylesheet"  href="adminstyle.css"> 
 </head>
 <body>
+<section class="content">
+<div id="container" class="card">
     <h2>Login</h2>
     <?php
     session_start();
     if (isset($_SESSION['error'])) {
-        echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
+        echo "<p style='color:red'><center>" . $_SESSION['error'] . "</center></p>";
         unset($_SESSION['error']);
     }
     ?>
@@ -27,8 +30,11 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <br><br>
-        <button type="submit">Login</button>
+        <input type="submit" value="Login">
+        <p class="signuptext">Don't have an account? <a href="signup.php">Sign Up</a></p>
+
     </form>
-    <p>Don't have an account? <a href="signup.php">Create account</a></p>
+        </div>
+        </section>
 </body>
 </html>

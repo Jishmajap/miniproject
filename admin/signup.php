@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
+    <link rel="stylesheet"  href="adminstyle.css"> 
+
 </head>
 <body>
+<section class="content">
+<div id="container" class="card">
     <h2>Sign Up</h2>
     <?php
     session_start();
     if (isset($_SESSION['error'])) {
-        echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
+        echo "<p style='color:red'><center>" . $_SESSION['error'] . "</center></p>";
         unset($_SESSION['error']);
     }
     if (isset($_SESSION['success'])) {
-        echo "<p style='color:green'>" . $_SESSION['success'] . "</p>";
+        echo "<p style='color:green'><center>" . $_SESSION['success'] . "</center></p>";
         unset($_SESSION['success']);
     }
     ?>
@@ -34,7 +38,12 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <br><br>
-        <button type="submit">Sign Up</button>
+        <input type="submit" value="Signup">
+
+<p class="logintext">Already have an account? <a href="login.php">Login</a></p>
+
     </form>
+    </div>
+        </section>
 </body>
 </html>
