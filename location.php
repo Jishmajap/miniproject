@@ -7,10 +7,9 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Find a Shop</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script>
-
     function getLocation() {
         console.log("Getting location...");
         if (navigator.geolocation) {
@@ -24,7 +23,6 @@ session_start();
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
         console.log("Position obtained: ", lat, lon);
-        // Send the location to the server
         fetchLocationFromServer(lat, lon);
     }
 
@@ -66,42 +64,43 @@ session_start();
                 displayShops(shops);
             }
         };
-        // Assuming the location is in the format "address, district"
         var parts = location.split(", ");
         var district = parts[parts.length - 1];
         xhr.send("district=" + encodeURIComponent(district));
     }
 
-    function fetchShops() {
-    fetch('fetch_shops.php')
-        .then(response => response.json())
-        .then(data => {
-            let table = document.getElementById("shopTable");
-            // Clear existing rows except the header
-            table.innerHTML = `
-                <tr>
-                    <th>Shop Name</th>
-                    <th>Address</th>
-                    <th>District</th>
-                    <th>Distance (km)</th>
-                </tr>
-            `;
-            for (let shop of data) {
-                let row = table.insertRow();
-                row.insertCell(0).innerHTML = shop.name;
-                row.insertCell(1).innerHTML = shop.address;
-                row.insertCell(2).innerHTML = shop.district;
-                row.insertCell(3).innerHTML = shop.distance;
-            }
-        })
-        .catch(error => {
-            document.getElementById("errorDisplay").innerHTML = "Error fetching shop data.";
-            console.error('Error:', error);
-        });
-}
-</script>
-</head>
+    function displayShops(shops) {
+        let table = document.getElementById("shopTable");
+        table.innerHTML = `
+            <tr>
+                <th>Shop Name</th>
+                <th>Address</th>
+                <th>District</th>
+                <th>Distance (km)</th>
+                <th>Action</th>
+            </tr>
+        `;
+        for (let shop of shops) {
+            let row = table.insertRow();
+            row.insertCell(0).innerHTML = shop.name;
+            row.insertCell(1).innerHTML = shop.address;
+            row.insertCell(2).innerHTML = shop.district;
+            row.insertCell(3).innerHTML = shop.distance;
+            let actionCell = row.insertCell(4);
+            let button = document.createElement("button");
+            button.innerHTML = "Send Request";
+            button.onclick = function() {
+                window.location.href = `request.php?shop_name=${encodeURIComponent(shop.name)}&shop_address=${encodeURIComponent(shop.address)}`;
+            };
+            actionCell.appendChild(button);
+        }
+    }
 
+    function showError(error) {
+        document.getElementById("errorDisplay").innerHTML = error.message;
+    }
+    </script>
+</head>
 <body>
     <section id="location">
         <ul class="navul">
@@ -122,7 +121,7 @@ session_start();
         </ul>
 
         <div class="loccontent">
-            <h1>Find Your service </br> Now</h1>
+            <h1>Find Your Service Now</h1>
             <br><br>
 
             <form class="locationform" onsubmit="fetchShops(); return false;">
@@ -141,6 +140,7 @@ session_start();
                     <th>Address</th>
                     <th>District</th>
                     <th>Distance (km)</th>
+                    <th>Action</th>
                 </tr>
             </table>
         </div>
