@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_connection.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
@@ -14,24 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = htmlspecialchars($_POST['phone']);
     $current_location = htmlspecialchars($_POST['current_location']);
     $service_needed = htmlspecialchars($_POST['service_needed']);
+    $status = 'Pending'; // Default status
 
-    // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "shop_management";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $stmt = $conn->prepare("INSERT INTO service_requests (shop_name, shop_address, name, email, phone, current_location, service_needed) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssss", $shop_name, $shop_address, $name, $email, $phone, $current_location, $service_needed);
+    $stmt = $conn->prepare("INSERT INTO service_requests (shop_name, shop_address, name, email, phone, current_location, service_needed, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssss", $shop_name, $shop_address, $name, $email, $phone, $current_location, $service_needed, $status);
 
     if ($stmt->execute()) {
-        header("Location: location.php");
+        header("Location: shop_dashboard.php");
         exit;
     } else {
         echo "Error: " . $stmt->error;
