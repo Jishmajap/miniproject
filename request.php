@@ -18,6 +18,7 @@ $shop_address = isset($_GET['shop_address']) ? htmlspecialchars($_GET['shop_addr
     <title>Service Request</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+<style></style>
 <body>
     <h1>Service Request</h1>
     <form action="submit_request.php" method="post">

@@ -33,14 +33,18 @@ session_start();
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                console.log("Nominatim response: ", response);
-                if (response.address) {
-                    var address = response.address.village || response.address.town || response.address.city || response.address.state_district || response.address.state;
-                    var district = response.address.state_district || response.address.state;
-                    document.getElementById("locationDisplay").value = `${address}, ${district}`;
-                } else {
-                    showError({message: "Unable to retrieve location details."});
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log("Nominatim response: ", response);
+                    if (response.address) {
+                        var address = response.address.village || response.address.town || response.address.city || response.address.state_district || response.address.state;
+                        var district = response.address.state_district || response.address.state;
+                        document.getElementById("locationDisplay").value = `${address}, ${district}`;
+                    } else {
+                        showError({message: "Unable to retrieve location details."});
+                    }
+                } catch (e) {
+                    showError({message: "Error parsing location data."});
                 }
             }
         };
@@ -54,19 +58,33 @@ session_start();
             return;
         }
 
+        // Debugging: Log the location value
+        console.log("Location input:", location);
+
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "fetch_location.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var shops = JSON.parse(xhr.responseText);
-                console.log("Shops response: ", shops);
-                displayShops(shops);
+            if (xhr.readyState == 4) {
+                console.log("XHR status: ", xhr.status);
+                console.log("XHR responseText: ", xhr.responseText);
+                if (xhr.status == 200) {
+                    try {
+                        var responseText = xhr.responseText;
+                        console.log("Response text: ", responseText);
+                        var shops = JSON.parse(responseText);
+                        console.log("Shops response: ", shops);
+                        displayShops(shops);
+                    } catch (e) {
+                        showError({message: "Error parsing shops data."});
+                        console.error("Parsing Error: ", e);
+                    }
+                } else {
+                    showError({message: "Error fetching shops data. Status: " + xhr.status});
+                }
             }
         };
-        var parts = location.split(", ");
-        var district = parts[parts.length - 1];
-        xhr.send("district=" + encodeURIComponent(district));
+        xhr.send("district=" + encodeURIComponent(location));  // Send location as URL-encoded
     }
 
     function displayShops(shops) {
@@ -80,24 +98,42 @@ session_start();
                 <th>Action</th>
             </tr>
         `;
-        for (let shop of shops) {
+
+        if (shops.error) {
+            // Display error message if there's an error in the response
             let row = table.insertRow();
-            row.insertCell(0).innerHTML = shop.name;
-            row.insertCell(1).innerHTML = shop.address;
-            row.insertCell(2).innerHTML = shop.district;
-            row.insertCell(3).innerHTML = shop.distance;
-            let actionCell = row.insertCell(4);
-            let button = document.createElement("button");
-            button.innerHTML = "Send Request";
-            button.onclick = function() {
-                window.location.href = `request.php?shop_name=${encodeURIComponent(shop.name)}&shop_address=${encodeURIComponent(shop.address)}`;
-            };
-            actionCell.appendChild(button);
+            let cell = row.insertCell(0);
+            cell.colSpan = 5;
+            cell.innerHTML = shops.error;
+            cell.style.textAlign = "center";
+        } else if (shops.length === 0) {
+            // Handle case where no shops are found
+            let row = table.insertRow();
+            let cell = row.insertCell(0);
+            cell.colSpan = 5;
+            cell.innerHTML = "No shops found at this location.";
+            cell.style.textAlign = "center";
+        } else {
+            for (let shop of shops) {
+                let row = table.insertRow();
+                row.insertCell(0).innerHTML = shop.shop_name;
+                row.insertCell(1).innerHTML = shop.address;
+                row.insertCell(2).innerHTML = shop.district;
+                row.insertCell(3).innerHTML = shop.distance || "N/A";
+                let actionCell = row.insertCell(4);
+                let button = document.createElement("button");
+                button.innerHTML = "Send Request";
+                button.onclick = function() {
+                    window.location.href = `request.php?shop_name=${encodeURIComponent(shop.shop_name)}&shop_address=${encodeURIComponent(shop.address)}`;
+                };
+                actionCell.appendChild(button);
+            }
         }
     }
 
     function showError(error) {
         document.getElementById("errorDisplay").innerHTML = error.message;
+        console.error(error.message);
     }
     </script>
 </head>
@@ -119,11 +155,9 @@ session_start();
             <li class="navli"><a href="index.php#about">About</a></li>
             <li class="navli"><a href="index.php">Home</a></li>
         </ul>
-
         <div class="loccontent">
             <h1>Find Your Service Now</h1>
             <br><br>
-
             <form class="locationform" onsubmit="fetchShops(); return false;">
                 <button onclick="getLocation(); return false;" class="currentloc">Get Current Location</button>
                 <br><br>
@@ -132,7 +166,7 @@ session_start();
                 <input type="submit" value="Search">
                 <br><br>
                 <div id="errorDisplay" style="color: red;"></div>
-            <div id="shopResults"></div>
+                <div id="shopResults"></div>
             </form>
             <table id="shopTable" border="1">
                 <tr>
@@ -146,4 +180,4 @@ session_start();
         </div>
     </section>
 </body>
-</html>
+</html> 
