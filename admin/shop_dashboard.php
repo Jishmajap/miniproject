@@ -42,12 +42,12 @@ $stmt_services->execute();
 $result_services = $stmt_services->get_result();
 
 // Fetch service requests for the current shop
-$sql_requests = "SELECT * FROM service_requests WHERE shop_id=?";
+$sql_requests = "SELECT * FROM service_requests WHERE email=?";
 $stmt_requests = $conn->prepare($sql_requests);
 if ($stmt_requests === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
-$stmt_requests->bind_param("i", $shop_id);
+$stmt_requests->bind_param("i", $email);
 $stmt_requests->execute();
 $result_requests = $stmt_requests->get_result();
 ?>
@@ -148,7 +148,7 @@ $result_requests = $stmt_requests->get_result();
                 if ($result_requests->num_rows > 0) {
                     while($row = $result_requests->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['phone']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['current_location']) . "</td>";
