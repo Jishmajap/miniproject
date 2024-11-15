@@ -175,7 +175,7 @@ $result_requests = $stmt_requests->get_result();
                 if ($result_services->num_rows > 0) {
                     while ($row = $result_services->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['service_name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['price']) . "</td>";
                         echo "</tr>";
                     }
@@ -190,37 +190,6 @@ $result_requests = $stmt_requests->get_result();
             </table>
         </div>
 
-        <div class="card" id="shop_settings">
-            <h2>Shop Settings</h2>
-            <p>Update your shop settings and preferences.</p>
-            <form action="shop_settings_process.php" method="post">
-                <label for="shop_name">Shop Name:</label>
-                <input type="text" id="shop_name" name="shop_name" value="<?php echo htmlspecialchars($shop_name); ?>" required><br><br>
-                
-                <label for="shop_email">Shop Email:</label>
-                <input type="email" id="shop_email" name="shop_email" value="<?php echo htmlspecialchars($shop_email); ?>" required><br><br>
-                
-                <label for="shop_address">Shop Address:</label>
-                <textarea id="shop_address" name="shop_address" rows="4" required><?php echo htmlspecialchars($address); ?></textarea><br><br>
-                
-                <label for="district">District:</label>
-                <input type="text" id="district" name="district" value="<?php echo htmlspecialchars($district); ?>" required><br><br>
-                
-                <label for="latitude">Latitude:</label>
-                <input type="text" id="latitude" name="latitude" value="<?php echo htmlspecialchars($latitude); ?>" required><br><br>
-                
-                <label for="longitude">Longitude:</label>
-                <input type="text" id="longitude" name="longitude" value="<?php echo htmlspecialchars($longitude); ?>" required><br><br>
-                
-                <label for="phone_number">Phone Number:</label>
-                <input type="text" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($phone_number); ?>" required><br><br>
-                
-                <label for="website">Website:</label>
-                <input type="text" id="website" name="website" value="<?php echo htmlspecialchars($website); ?>" required><br><br>
-                
-                <input type="submit" value="Save Settings">
-            </form>
-        </div>
     </div>
 </body>
 </html>

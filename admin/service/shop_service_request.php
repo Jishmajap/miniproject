@@ -2,33 +2,50 @@
 // Include database connection
 include '../db_connection.php';
 
-// Include login check
+// Start the session
 session_start();
+
+// Check if the user is logged in
 if (!isset($_SESSION['email'])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
-// Fetch the shop details using the owner email
-$sql_shop = "SELECT id FROM shops WHERE owner_email=?";
-$stmt_shop = $conn->prepare($sql_shop);
-$stmt_shop->bind_param("s", $email);
-$stmt_shop->execute();
-$stmt_shop->bind_result($shop_id);
-$stmt_shop->fetch();
-$stmt_shop->close();
-
-// Check if shop_id was retrieved
-if (!$shop_id) {
-    die('No shop found for the given email.');
-}
+// Get the email from the session
+$email = $_SESSION['email'];
 
 // Fetch service requests for the current shop
-$sql_requests = "SELECT * FROM service_requests WHERE shop_id=?";
+$sql_requests = "SELECT * FROM service_requests WHERE email=?";
 $stmt_requests = $conn->prepare($sql_requests);
-$stmt_requests->bind_param("i", $shop_id);
+if ($stmt_requests === false) {
+    die('Prepare failed: ' . htmlspecialchars($conn->error));
+}
+$stmt_requests->bind_param("s", $email);
 $stmt_requests->execute();
 $result_requests = $stmt_requests->get_result();
+if ($result_requests === false) {
+    die('Execute failed: ' . htmlspecialchars($stmt_requests->error));
+}
+
+// Check if the form is submitted to update the status
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
+    $request_id = $_POST['request_id'];
+    $new_status = $_POST['status'];
+
+    // Update the status in the database
+    $sql_update = "UPDATE service_requests SET status=? WHERE id=?";
+    $stmt_update = $conn->prepare($sql_update);
+    if ($stmt_update === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+    $stmt_update->bind_param("si", $new_status, $request_id);
+    $stmt_update->execute();
+    $stmt_update->close();
+
+    // Redirect to the same page to reflect the changes
+    header("Location: shop_service_request.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,27 +82,34 @@ $result_requests = $stmt_requests->get_result();
         .sidebar a:hover {
             background-color: #575757;
         }
-        .container {
+        .content {
             margin-left: 270px;
             padding: 20px;
-            width: calc(100% - 270px);
+            flex-grow: 1;
         }
         .card {
             background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        table {
+        .card h2 {
+            margin-top: 0;
+        }
+        .card table {
             width: 100%;
             border-collapse: collapse;
         }
-        table, th, td {
-            border: 1px solid black;
+        .card table, .card th, .card td {
+            border: 1px solid #ddd;
         }
-        th, td {
-            padding: 10px;
+        .card th, .card td {
+            padding: 8px;
             text-align: left;
+        }
+        .card th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -95,13 +119,12 @@ $result_requests = $stmt_requests->get_result();
         <a href="../shop_dashboard.php">Dashboard</a>
         <a href="shop_service_request.php">Service Requests</a>
         <a href="shop_available_service.php">Available Services</a>
-        <a href="shop_settings.php">Settings</a>
-        <a href="logout.php">Logout</a>
+        <a href="../shop_settings.php">Settings</a>
+        <a href="../admin/logout.php">Logout</a>
     </div>
-    <div class="container">
-        <h1>Service Requests</h1>
-        <div class="card" id="recent_services">
-            <h2>Recent Service Requests</h2>
+    <div class="content">
+        <div class="card" id="service_requests">
+            <h2>Service Requests</h2>
             <table>
                 <tr>
                     <th>Customer Name</th>
@@ -111,22 +134,34 @@ $result_requests = $stmt_requests->get_result();
                     <th>Service Needed</th>
                     <th>Timestamp</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
                 <?php
                 if ($result_requests->num_rows > 0) {
                     while($row = $result_requests->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['phone']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['current_location']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['service_needed']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['timestamp']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['status']) . "</td>";
+                        echo "<td>";
+                        echo "<form action='shop_service_request.php' method='post'>";
+                        echo "<input type='hidden' name='request_id' value='" . htmlspecialchars($row['id']) . "'>";
+                        echo "<select name='status'>";
+                        echo "<option value='Pending'" . ($row['status'] == 'Pending' ? ' selected' : '') . ">Pending</option>";
+                        echo "<option value='In Progress'" . ($row['status'] == 'In Progress' ? ' selected' : '') . ">In Progress</option>";
+                        echo "<option value='Completed'" . ($row['status'] == 'Completed' ? ' selected' : '') . ">Completed</option>";
+                        echo "</select>";
+                        echo "<input type='submit' name='update_status' value='Update'>";
+                        echo "</form>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='7'>No service requests found</td></tr>";
+                    echo "<tr><td colspan='8'>No service requests found.</td></tr>";
                 }
                 ?>
             </table>
