@@ -14,30 +14,30 @@ if (!isset($_SESSION['email'])) {
 // Get the email from the session
 $email = $_SESSION['email'];
 
-// Fetch the shop details using the owner email
-$sql_shop = "SELECT id, shop_name, address, district, latitude, longitude, phone_number, email, website, owner_email FROM shops WHERE owner_email=?";
-$stmt_shop = $conn->prepare($sql_shop);
-if ($stmt_shop === false) {
+// Fetch all shops associated with the owner email
+$sql_shops = "SELECT shop_name, address, district, latitude, longitude, phone_number, email, website FROM shops WHERE owner_email=?";
+$stmt_shops = $conn->prepare($sql_shops);
+if ($stmt_shops === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
-$stmt_shop->bind_param("s", $email);
-$stmt_shop->execute();
-$stmt_shop->bind_result($shop_id, $shop_name, $address, $district, $latitude, $longitude, $phone_number, $shop_email, $website, $owner_email);
-$stmt_shop->fetch();
-$stmt_shop->close();
-
-// Check if shop_id was retrieved
-if (!$shop_id) {
-    die('No shop found for the given email.');
+$stmt_shops->bind_param("s", $email);
+$stmt_shops->execute();
+$result_shops = $stmt_shops->get_result();
+$shops = [];
+while ($row = $result_shops->fetch_assoc()) {
+    $shops[] = $row;
 }
+$stmt_shops->close();
+
+
 
 // Fetch available services for the current shop
-$sql_services = "SELECT * FROM services WHERE shop_id=?";
+$sql_services = "SELECT * FROM services WHERE email=?";
 $stmt_services = $conn->prepare($sql_services);
 if ($stmt_services === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
-$stmt_services->bind_param("i", $shop_id);
+$stmt_services->bind_param("i", $email);
 $stmt_services->execute();
 $result_services = $stmt_services->get_result();
 
@@ -132,6 +132,7 @@ $result_requests = $stmt_requests->get_result();
         <h1>Welcome to the Car Service Shop Dashboard</h1>
         <p>Manage your shop, view service orders, and update your profile.</p>
 
+
         <div class="card" id="recent_services">
             <h2>Recent Service Requests</h2>
             <table>
@@ -186,6 +187,36 @@ $result_requests = $stmt_requests->get_result();
                 $stmt_services->close();
                 $stmt_requests->close();
                 $conn->close();
+                ?>
+            </table>
+        </div>
+
+        <div class="card" id="shops">
+            <h2>Your Shops</h2>
+            <table>
+                <tr>
+                    <th>Shop Name</th>
+                    <th>Address</th>
+                    <th>District</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                </tr>
+                <?php
+                if (count($shops) > 0) {
+                    foreach ($shops as $shop) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($shop['shop_name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($shop['address']) . "</td>";
+                        echo "<td>" . htmlspecialchars($shop['district']) . "</td>";
+                        echo "<td>" . htmlspecialchars($shop['phone_number']) . "</td>";
+                        echo "<td>" . htmlspecialchars($shop['email']) . "</td>";
+                        echo "<td>" . htmlspecialchars($shop['website']) . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No shops found</td></tr>";
+                }
                 ?>
             </table>
         </div>
