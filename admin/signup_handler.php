@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Prepare SQL query based on user type
     if ($userType == 'admin') {
-        $query = "INSERT INTO admins (username, email, password) VALUES (?, ?, ?)";
+        $query = "INSERT INTO admins (name, email, password) VALUES (?, ?, ?)";
     } else {
-        $query = "INSERT INTO shop_owners (username, email, password) VALUES (?, ?, ?)";
+        $query = "INSERT INTO shop_owners (name, email, password) VALUES (?, ?, ?)";
     }
 
     // Create a prepared statement

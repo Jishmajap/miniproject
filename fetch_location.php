@@ -15,6 +15,7 @@ if ($conn->connect_error) {
 
 $district = $_POST['district'] ?? '';
 
+
 if (empty($district)) {
     echo json_encode(["error" => "District is required"]);
     exit();
@@ -24,7 +25,7 @@ if (empty($district)) {
 error_log("Received district: " . $district);
 
 // SQL query to find shops within the specified district
-$sql = "SELECT id, shop_name, address, district, latitude, longitude, phone_number, email, website, owner_email FROM shops WHERE district = ?";
+$sql = "SELECT id, shop_name, address, district, latitude, longitude, phone_number, email, website, owner_email FROM shops WHERE district LIKE CONCAT('%', ?, '%')";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {

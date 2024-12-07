@@ -15,7 +15,7 @@ if (!isset($_SESSION['email'])) {
 $email = $_SESSION['email'];
 
 // Fetch all shops associated with the owner email
-$sql_shops = "SELECT shop_name, address, district, latitude, longitude, phone_number, email, website FROM shops WHERE owner_email=?";
+$sql_shops = "SELECT id, shop_name, address, district, latitude, longitude, phone_number, email, website FROM shops WHERE owner_email=?";
 $stmt_shops = $conn->prepare($sql_shops);
 if ($stmt_shops === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
@@ -29,27 +29,42 @@ while ($row = $result_shops->fetch_assoc()) {
 }
 $stmt_shops->close();
 
+// Fetch available services and service requests for each shop
+$services = [];
+$service_requests = [];
+foreach ($shops as $shop) {
+    $shop_id = $shop['id'];
 
+    // Fetch services for the current shop
+    $sql_services = "SELECT * FROM services WHERE shop_id=?";
+    $stmt_services = $conn->prepare($sql_services);
+    if ($stmt_services === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+    $stmt_services->bind_param("i", $shop_id);
+    $stmt_services->execute();
+    $result_services = $stmt_services->get_result();
+    while ($row = $result_services->fetch_assoc()) {
+        $services[$shop_id][] = $row;
+    }
+    $stmt_services->close();
 
-// Fetch available services for the current shop
-$sql_services = "SELECT * FROM services WHERE email=?";
-$stmt_services = $conn->prepare($sql_services);
-if ($stmt_services === false) {
-    die('Prepare failed: ' . htmlspecialchars($conn->error));
+    // Fetch service requests for the current shop
+    $sql_requests = "SELECT * FROM service_requests WHERE shop_id=?";
+    $stmt_requests = $conn->prepare($sql_requests);
+    if ($stmt_requests === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+    $stmt_requests->bind_param("i", $shop_id);
+    $stmt_requests->execute();
+    $result_requests = $stmt_requests->get_result();
+    while ($row = $result_requests->fetch_assoc()) {
+        $service_requests[$shop_id][] = $row;
+    }
+    $stmt_requests->close();
 }
-$stmt_services->bind_param("i", $email);
-$stmt_services->execute();
-$result_services = $stmt_services->get_result();
 
-// Fetch service requests for the current shop
-$sql_requests = "SELECT * FROM service_requests WHERE email=?";
-$stmt_requests = $conn->prepare($sql_requests);
-if ($stmt_requests === false) {
-    die('Prepare failed: ' . htmlspecialchars($conn->error));
-}
-$stmt_requests->bind_param("i", $email);
-$stmt_requests->execute();
-$result_requests = $stmt_requests->get_result();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +147,6 @@ $result_requests = $stmt_requests->get_result();
         <h1>Welcome to the Car Service Shop Dashboard</h1>
         <p>Manage your shop, view service orders, and update your profile.</p>
 
-
         <div class="card" id="recent_services">
             <h2>Recent Service Requests</h2>
             <table>
@@ -146,17 +160,19 @@ $result_requests = $stmt_requests->get_result();
                     <th>Status</th>
                 </tr>
                 <?php
-                if ($result_requests->num_rows > 0) {
-                    while($row = $result_requests->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['phone']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['current_location']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['service_needed']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['timestamp']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['status']) . "</td>";
-                        echo "</tr>";
+                if (!empty($service_requests)) {
+                    foreach ($service_requests as $shop_id => $requests) {
+                        foreach ($requests as $row) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['phone']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['current_location']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['service_needed']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['timestamp']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['status']) . "</td>";
+                            echo "</tr>";
+                        }
                     }
                 } else {
                     echo "<tr><td colspan='7'>No service requests found</td></tr>";
@@ -173,20 +189,18 @@ $result_requests = $stmt_requests->get_result();
                     <th>Price</th>
                 </tr>
                 <?php
-                if ($result_services->num_rows > 0) {
-                    while ($row = $result_services->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['service_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['price']) . "</td>";
-                        echo "</tr>";
+                if (!empty($services)) {
+                    foreach ($services as $shop_id => $shop_services) {
+                        foreach ($shop_services as $row) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['service_name']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['price']) . "</td>";
+                            echo "</tr>";
+                        }
                     }
                 } else {
                     echo "<tr><td colspan='2'>No services available</td></tr>";
                 }
-
-                $stmt_services->close();
-                $stmt_requests->close();
-                $conn->close();
                 ?>
             </table>
         </div>
