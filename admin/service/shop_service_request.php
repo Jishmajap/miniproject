@@ -11,20 +11,39 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-// Get the email from the session
-$email = $_SESSION['email'];
+// Get the shop's email from the session
+$shop_email = $_SESSION['email'];
 
-// Fetch service requests for the current shop
-$sql_requests = "SELECT * FROM service_requests WHERE email=?";
-$stmt_requests = $conn->prepare($sql_requests);
-if ($stmt_requests === false) {
+// Fetch all shops associated with the owner email
+$sql_shops = "SELECT id FROM shops WHERE owner_email=?";
+$stmt_shops = $conn->prepare($sql_shops);
+if ($stmt_shops === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
-$stmt_requests->bind_param("s", $email);
-$stmt_requests->execute();
-$result_requests = $stmt_requests->get_result();
-if ($result_requests === false) {
-    die('Execute failed: ' . htmlspecialchars($stmt_requests->error));
+$stmt_shops->bind_param("s", $shop_email);
+$stmt_shops->execute();
+$result_shops = $stmt_shops->get_result();
+$shop_ids = [];
+while ($row = $result_shops->fetch_assoc()) {
+    $shop_ids[] = $row['id'];
+}
+$stmt_shops->close();
+
+// Fetch service requests for the current shop
+$service_requests = [];
+foreach ($shop_ids as $shop_id) {
+    $sql_requests = "SELECT * FROM service_requests WHERE shop_id=? ORDER BY timestamp DESC";
+    $stmt_requests = $conn->prepare($sql_requests);
+    if ($stmt_requests === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+    $stmt_requests->bind_param("i", $shop_id);
+    $stmt_requests->execute();
+    $result_requests = $stmt_requests->get_result();
+    while ($row = $result_requests->fetch_assoc()) {
+        $service_requests[] = $row;
+    }
+    $stmt_requests->close();
 }
 
 // Check if the form is submitted to update the status
@@ -111,6 +130,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
         .card th {
             background-color: #f2f2f2;
         }
+        .status-pending {
+            background-color: red;
+        }
+        .status-in-progress {
+            background-color: yellow;
+        }
+        .status-completed {
+            background-color: green;
+        }
     </style>
 </head>
 <body>
@@ -119,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
         <a href="../shop_dashboard.php">Dashboard</a>
         <a href="shop_service_request.php">Service Requests</a>
         <a href="shop_available_service.php">Available Services</a>
-        <a href="../shop_settings.php">Settings</a>
+        <a href="shop_settings.php">Settings</a>
         <a href="../admin/logout.php">Logout</a>
     </div>
     <div class="content">
@@ -137,9 +165,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
                     <th>Action</th>
                 </tr>
                 <?php
-                if ($result_requests->num_rows > 0) {
-                    while($row = $result_requests->fetch_assoc()) {
-                        echo "<tr>";
+                if (!empty($service_requests)) {
+                    foreach ($service_requests as $row) {
+                        $status_class = '';
+                        if ($row['status'] == 'Pending') {
+                            $status_class = 'status-pending';
+                        } elseif ($row['status'] == 'In Progress') {
+                            $status_class = 'status-in-progress';
+                        } elseif ($row['status'] == 'Completed') {
+                            $status_class = 'status-completed';
+                        }
+                        echo "<tr class='$status_class'>";
                         echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['phone']) . "</td>";

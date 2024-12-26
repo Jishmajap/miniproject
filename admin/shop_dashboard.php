@@ -50,7 +50,7 @@ foreach ($shops as $shop) {
     $stmt_services->close();
 
     // Fetch service requests for the current shop
-    $sql_requests = "SELECT * FROM service_requests WHERE shop_id=?";
+    $sql_requests = "SELECT * FROM service_requests WHERE shop_id=? ORDER BY timestamp DESC";
     $stmt_requests = $conn->prepare($sql_requests);
     if ($stmt_requests === false) {
         die('Prepare failed: ' . htmlspecialchars($conn->error));
