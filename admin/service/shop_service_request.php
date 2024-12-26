@@ -141,6 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
         <h2>Car Service Shop</h2>

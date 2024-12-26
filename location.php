@@ -58,6 +58,7 @@ session_start();
             return;
         }
 
+        
         // Extract the district part after the comma
         var district = location.split(", ").pop();
         // echo district

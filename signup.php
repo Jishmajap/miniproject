@@ -1,3 +1,48 @@
+<?php
+session_start();
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "user_management";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data
+    $name = $_POST['name'];
+    $email = $_POST['emaiid'];
+    $password = $_POST['password'];
+    $confirmpassword = $_POST['confirmpassword'];
+
+    // Check if passwords match
+    if ($password !== $confirmpassword) {
+        $error_message = "Passwords do not match.";
+    } else {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $password = $hashed_password;
+
+        // Insert user into database
+        $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+
+        if ($conn->query($sql) === TRUE) {
+            header("Location: login.php");
+            exit();
+        } else {
+            $error_message = "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,10 +70,14 @@
         <li class="navli"><a href="index.php">Home</a></li>
         </ul>
         
+        
         <section class="content">
                 <div id="container" class="card">
                         <h1>SignUp</h1>
-                        <form action="signup_process.php" method="post">  
+                        <?php if (isset($error_message)): ?>
+                            <p class="error"><?php echo $error_message; ?></p>
+                        <?php endif; ?>
+                        <form action="signup.php" method="post">  
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" placeholder="name" required><br><br>
                         

@@ -148,7 +148,7 @@ $shops_result = $conn->query("SELECT * FROM shops");
         <a href="../admin_dashboard.php">Overview</a>
         <a href="admin_shops.php">Shops</a>
         <a href="admin_users.php">Users</a>
-        <a href="admin_logout.php">Logout</a>
+        <a href="../logout.php">Logout</a>
     </div>
     <div class="content">
         <h1>Manage Shops</h1>

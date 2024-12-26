@@ -20,6 +20,7 @@ if (empty($district)) {
     exit();
 }
 
+
 // Debugging: Log the received district
 error_log("Received district: " . $district);
 

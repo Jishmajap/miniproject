@@ -67,6 +67,7 @@ foreach ($shops as $shop) {
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

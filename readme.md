@@ -40,6 +40,7 @@ Database shops_management
     FOREIGN KEY (shop_id) REFERENCES shops(id)
 );`
 
+
 # Table service_requests
 - id,shop_id,shop_name,shop_address,name,email,phone,current_location,service_needed,timestamp,status
 
