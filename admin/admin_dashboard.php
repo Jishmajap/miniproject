@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-
 // Include database connection
-include 'db_connection.php';
+include './db_connection.php';
 
 // Fetch data for the overview section
+$total_shops = $conn->query("SELECT COUNT(*) FROM shops")->fetch_row()[0];
+$total_services = $conn->query("SELECT COUNT(*) FROM services")->fetch_row()[0];
+$total_requests = $conn->query("SELECT COUNT(*) FROM service_requests")->fetch_row()[0];
 
 $conn->close();
 ?>
@@ -82,11 +84,9 @@ $conn->close();
     <div class="sidebar">
         <h2>Admin Dashboard</h2>
         <a href="admin_dashboard.php">Overview</a>
-        <a href="admin_shops.php">Shops</a>
-        <a href="admin_services.php">Services</a>
-        <a href="admin_service_requests.php">Service Requests</a>
-        <a href="admin_users.php">Users</a>
-        <a href="admin_logout.php">Logout</a>
+        <a href="admins/admin_shops.php">Shops</a>
+        <a href="admins/admin_users.php">Users</a>
+        <a href="admins/admin_logout.php">Logout</a>
     </div>
     <div class="content">
         <h1>Welcome to the Admin Dashboard</h1>
@@ -97,7 +97,34 @@ $conn->close();
             <p>Total Shops: <?php echo $total_shops; ?></p>
             <p>Total Services: <?php echo $total_services; ?></p>
             <p>Total Service Requests: <?php echo $total_requests; ?></p>
-            <p>Total Users: <?php echo $total_users; ?></p>
+        </div>
+
+        <div class="card">
+            <h2>Recent Activity</h2>
+            <p>Recent activities or updates will be displayed here.</p>
+        </div>
+
+        <div class="card">
+            <h2>Quick Actions</h2>
+            <button>Add New Shop</button>
+            <button>Approve Service Requests</button>
+            <button>Manage Users</button>
+        </div>
+
+        <div class="card">
+            <h2>Notifications</h2>
+            <p>Important notifications or alerts will be displayed here.</p>
+        </div>
+
+        <div class="card">
+            <h2>Statistics and Charts</h2>
+            <p>Visual representations of data such as charts or graphs will be displayed here.</p>
+        </div>
+
+        <div class="card">
+            <h2>Search and Filter</h2>
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
         </div>
 
         <!-- Additional sections for Shops, Services, Service Requests, and Users can be added here -->

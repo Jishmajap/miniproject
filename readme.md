@@ -58,6 +58,7 @@ Database shops_management
     FOREIGN KEY (shop_id) REFERENCES shops(id)
 );`
 
+
 Database user_management
 
 # Table users

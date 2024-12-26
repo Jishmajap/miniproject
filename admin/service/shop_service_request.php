@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
         <a href="shop_service_request.php">Service Requests</a>
         <a href="shop_available_service.php">Available Services</a>
         <a href="shop_settings.php">Settings</a>
-        <a href="../admin/logout.php">Logout</a>
+        <a href="../logout.php">Logout</a>
     </div>
     <div class="content">
         <div class="card" id="service_requests">
