@@ -58,8 +58,13 @@ session_start();
             return;
         }
 
-        // Debugging: Log the location value
-        console.log("Location input:", location);
+        
+        // Extract the district part after the comma
+        var district = location.split(", ").pop();
+        // echo district
+        
+        // Debugging: Log the extracted district value
+        console.log("Extracted district:", district);
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "fetch_location.php", true);
@@ -84,7 +89,7 @@ session_start();
                 }
             }
         };
-        xhr.send("district=" + encodeURIComponent(location));  // Send location as URL-encoded
+        xhr.send("district=" + encodeURIComponent(district));  // Send district as URL-encoded
     }
 
     function displayShops(shops) {
@@ -180,4 +185,4 @@ session_start();
         </div>
     </section>
 </body>
-</html> 
+</html>

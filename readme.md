@@ -27,9 +27,8 @@ Database shops_management
     owner_email VARCHAR(255) NOT NULL
 );`
 
-
 # Table services
-- id,shop_id,service_name,ription,price,email
+- id,shop_id,service_name,description,price,email
 
 `CREATE TABLE services (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,10 +42,11 @@ Database shops_management
 
 
 # Table service_requests
-- id,shop_name,shop_address,name,email,phone,cureent_location,service_needed,time_stamp,status,shop_id,customer_name
+- id,shop_id,shop_name,shop_address,name,email,phone,current_location,service_needed,timestamp,status
 
 `CREATE TABLE service_requests (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    shop_id INT NOT NULL,
     shop_name VARCHAR(255) NOT NULL,
     shop_address TEXT NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -56,15 +56,13 @@ Database shops_management
     service_needed TEXT NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(50) NOT NULL,
-    shop_id INT NOT NULL,
-    customer_name VARCHAR(255) NOT NULL,
     FOREIGN KEY (shop_id) REFERENCES shops(id)
 );`
 
 
 Database user_management
 
- # table users
+# Table users
 - id,name,email,password
 
 `CREATE TABLE users (

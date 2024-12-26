@@ -15,11 +15,11 @@ if ($conn->connect_error) {
 
 $district = $_POST['district'] ?? '';
 
-
 if (empty($district)) {
     echo json_encode(["error" => "District is required"]);
     exit();
 }
+
 
 // Debugging: Log the received district
 error_log("Received district: " . $district);
